@@ -51,3 +51,25 @@ https://github.com/Molunerfinn/PicGo
 https://portal.qiniu.com/bucket
 
 ```
+
+
+## 2 git无法提交
+
+macOS 10.13.4 git无法提交
+
+```
+https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent
+
+# clone by ssh
+
+eval "$(ssh-agent -s)"
+
+
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+
+ssh-add -K ~/.ssh/id_rsa
+
+```

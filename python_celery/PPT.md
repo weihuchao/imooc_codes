@@ -1,5 +1,5 @@
 
-## 1.1 celery的介绍
+## 1 celery的介绍
 
 Celery 是什么？
 
@@ -13,20 +13,20 @@ Celery 是一个简单、灵活且可靠的，处理大量消息的分布式系�
 
 
 
-## 1.2 celery的安装
+## 2 celery的安装
 
-#### 1.2.1 virtualenv
+#### 2.1 virtualenv
 
 ```shell
 pip install virtualenv
-virtualenv env
+        virtualenv env
 
 source env/bin/activate
 deactivate
 
 ```
 
-#### 1.2.2 virtualenvwrapper
+#### 2.2 virtualenvwrapper
 
 ```shell
 pip install virtualenvwrapper
@@ -45,7 +45,7 @@ deactivate
 
 ```
 
-#### 1.2.3 pyenv
+#### 2.3 pyenv
 
 
 ```shell
@@ -98,7 +98,7 @@ pyenv activate env
 
 ```
 
-### 1.2.4 celery
+### 2.4 celery
 
 ```shell
 pip install celery[redis]
@@ -110,7 +110,7 @@ pip install redis
 ```
 
 
-### 1.2.5 redis
+### 2.5 redis
 
 ```shell
 https://redis.io/download
@@ -121,6 +121,69 @@ cd redis-5.0.5
 make
 
 
+src/redis-server
+src/redis-cli
+
 ```
 
 
+## 3 基本使用
+
+
+```shell
+Package    Version
+---------- -------
+amqp       2.5.0
+billiard   3.6.0.0
+celery     4.3.0
+kombu      4.6.3
+pip        19.2.1
+pytz       2019.1
+redis      3.2.1
+setuptools 41.0.1
+vine       1.3.0
+wheel      0.33.4
+```
+
+```
+src/redis-server
+```
+
+```shell
+(env) ➜  demo_1 git:(master) ✗ python app.py
+start 2019-07-25 00:12:25.711772
+08645e77-7978-4cdf-a13e-eee7f323a3a5
+end 2019-07-25 00:12:25.755517
+
+```
+
+```shell
+(env) ➜  demo_1 git:(master) ✗ celery worker -A task -l INFO
+
+
+celery@bogon v4.3.0 (rhubarb)
+
+Darwin-17.5.0-x86_64-i386-64bit 2019-07-25 00:12:21
+
+[config]
+.> app:         my_task:0x106dc6810
+.> transport:   redis://localhost:6379/1
+.> results:     redis://localhost:6379/2
+.> concurrency: 4 (prefork)
+.> task events: OFF (enable -E to monitor tasks in this worker)
+
+[queues]
+.> celery           exchange=celery(direct) key=celery
+
+
+[tasks]
+  . task.add
+
+[2019-07-25 00:12:21,145: INFO/MainProcess] Connected to redis://localhost:6379/1
+[2019-07-25 00:12:21,154: INFO/MainProcess] mingle: searching for neighbors
+[2019-07-25 00:12:22,169: INFO/MainProcess] mingle: all alone
+[2019-07-25 00:12:22,178: INFO/MainProcess] celery@bogon ready.
+[2019-07-25 00:12:25,756: INFO/MainProcess] Received task: task.add[08645e77-7978-4cdf-a13e-eee7f323a3a5]
+[2019-07-25 00:12:35,771: INFO/ForkPoolWorker-3] Task task.add[08645e77-7978-4cdf-a13e-eee7f323a3a5] succeeded in 10.013767232s: 5
+
+```
