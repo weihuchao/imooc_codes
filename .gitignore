@@ -109,3 +109,10 @@ venv.bak/
 # soft src
 python_celery/src
 python_celery/env
+
+# idea
+.idea/
+.vscode/
+
+### OS X artifacts
+*.DS_Store
